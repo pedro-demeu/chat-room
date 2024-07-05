@@ -51,7 +51,8 @@ function Room() {
   }, []);
 
   return (
-    <div className="flex mt-20 w-[50%] h-full flex-col gap-4 justify-center items-center min-h-screen bg-gray-100 p-4">
+    <div className="h-full w-full bg-gray-100 flex justify-center items-center">
+    <div className="flex  w-[50%] h-full flex-col gap-4 justify-center items-center min-h-screen bg-gray-100 p-4">
       <div className="w-full max-w-2xl bg-white rounded-lg shadow-md p-6 space-y-6">
         <div className="flex justify-between space-x-2">
           <h1 className="text-3xl font-bold text-left text-gray-800">
@@ -110,6 +111,7 @@ function Room() {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }
