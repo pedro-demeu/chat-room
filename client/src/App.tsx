@@ -1,7 +1,10 @@
 import "./App.css";
+import { HomePage } from "./pages";
 function App() {
   return (
-    <h1 className="text-3xl font-bold underline text-red-300">Hello world!</h1>
+    <main className="h-screen w-screen bg-gray-100 flex justify-center">
+      <HomePage />
+    </main>
   );
 }
 
