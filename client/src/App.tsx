@@ -1,9 +1,9 @@
 import "./App.css";
-import { HomePage } from "./pages";
+import { RoomPage } from "./pages";
 function App() {
   return (
-    <main className="h-screen w-screen bg-gray-100 flex justify-center">
-      <HomePage />
+    <main className="h-full w-full bg-gray-100 flex justify-center">
+      <RoomPage />
     </main>
   );
 }
