@@ -1,12 +1,13 @@
 This is a basic boilerplate project to start creating APIs with Node.js and Express. CORS support enabled.
+Typescript enabled.
 
 # Getting started
 Install the dependencies:
 ```
-npm i || yarn
+yarn
 ```
 and then run:
 ```
-npm run start || yarn start
+yarn dev
 ```
 to start the server.
