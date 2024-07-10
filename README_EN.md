@@ -9,16 +9,16 @@ Real-time chat project in public rooms
 #### Project images:
 
 ## Home screen
-<img src="/welcome.png" alt="Chat Room WS - Welcome screen">
+<img src="/utils/welcome.png" alt="Chat Room WS - Welcome screen">
 
 ## Validations
-<img src="/validation.png" alt="Chat Room WS - Validation Image when entering room name">
+<img src="/utils/validation.png" alt="Chat Room WS - Validation Image when entering room name">
 
 ## Feedback Tooltips
-<img src="/tooltip-example.png" alt="Chat Room WS - Tooltip image when creating a room">
+<img src="/utils/tooltip-example.png" alt="Chat Room WS - Tooltip image when creating a room">
 
 ## Demo
-<img src="/demo.png" alt="Chat Room WS - Demo image">
+<img src="/utils/demo.png" alt="Chat Room WS - Demo image">
 
 ---
 

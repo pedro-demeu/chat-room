@@ -7,16 +7,16 @@ Projeto de bate papo real-time em salas públicas
 #### Imagens do projeto:
 
 ## Tela inicial
-<img src="/welcome.png" alt="Chat Room WS - Tela de bem vindo">
+<img src="/utils/welcome.png" alt="Chat Room WS - Tela de bem vindo">
 
 ## Validações
-<img src="/validation.png" alt="Chat Room WS - Imagem de Validação ao digitar nome da sala">
+<img src="/utils/validation.png" alt="Chat Room WS - Imagem de Validação ao digitar nome da sala">
 
 ## Tooltips de feedback
-<img src="/tooltip-example.png" alt="Chat Room WS - Imagem de tooltip ao criar uma sala">
+<img src="/utils/tooltip-example.png" alt="Chat Room WS - Imagem de tooltip ao criar uma sala">
 
 ## Demostração
-<img src="/demo.png" alt="Chat Room WS - Imagem de demonstração">
+<img src="/utils/demo.png" alt="Chat Room WS - Imagem de demonstração">
 
 ---
 
