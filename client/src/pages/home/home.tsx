@@ -21,13 +21,15 @@ function Home() {
             <p className="text-4xl font-extrabold">Chat Room | WS</p>
           </h1>
 
-          <div className="flex flex-col items-center gap-4">
+          <p>Somos uma plataforma de bate-papo em salas públicas.</p>
+
+          <div className="flex flex-col items-center gap-1">
             <h2 className="text-1xl text-gray-800 py-8 text-left w-full">
               O que você quer fazer hoje?
             </h2>
 
             <button
-              className="w-full px-4 py-2 bg-emerald-500 text-white rounded-md shadow-md hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-opacity-50"
+              className="w-full px-4 py-2 bg-emerald-600 text-white rounded-md shadow-md hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-opacity-50"
               onClick={handleJoinRoom}
             >
               Entrar em uma Sala Existente
