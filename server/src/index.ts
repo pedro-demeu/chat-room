@@ -101,3 +101,6 @@ io.on("connection", (socket) => {
 httpServer.listen(PORT, () => {
   console.log(`listening on port: ${PORT} 🚀`);
 });
+
+
+export default app;
