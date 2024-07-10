@@ -73,10 +73,6 @@ app.get("/v1/room/:roomId/messages", async (req, res) => {
   }
 });
 
-app.get("/v1/room/:roomId/participants", async (req, res) => {
-
-})
-
 io.on("connection", (socket) => {
   console.log("User is connected in socket server 🔋");
   const client = new MongoClient(database);

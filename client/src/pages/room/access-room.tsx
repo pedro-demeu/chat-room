@@ -1,13 +1,12 @@
 import { Formik } from "formik";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useSetRecoilState } from "recoil";
+import { loggedUserAtom } from "../../atoms/rooms";
 
 const schema = Yup.object().shape({
-  idRoom: Yup.number()
-    .typeError("Deve ser um valor numérico")
-    .positive("Somente números positivos")
+  idRoom: Yup.string()
     .required("Campo obrigatório"),
   username: Yup.string()
     .min(4, "Nome deve ter no mínimo 4 caracteres")
@@ -28,6 +27,7 @@ export default function AccessRoomPage() {
 
 const HomeForm = () => {
   const navigate = useNavigate();
+  const setLoggedUser = useSetRecoilState(loggedUserAtom);
   const handleBack = () => {
     navigate("/");
   };
@@ -35,24 +35,8 @@ const HomeForm = () => {
     idRoom: number | null;
     username: string;
   }) => {
-    try {
-      const response = await fetch("http://localhost:8080/join-room", {
-        method: "POST",
-        body: JSON.stringify(values),
-      });
-
-      const res = await response.json();
-
-      if (res.type === "warning") toast.warning(res.message);
-      if (res.type === "success") {
-        toast.success(res.message);
-
-        navigate(`/queue?username=${values.username}?roomId=${values.idRoom}`);
-      }
-    } catch (err) {
-      toast.error("Falha no servidor, tente mais tarde.");
-      console.error("Failed to request", err);
-    }
+    setLoggedUser(values.username)
+    navigate(`/room/${values.idRoom}`)
   };
 
   return (

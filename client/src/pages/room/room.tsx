@@ -1,6 +1,6 @@
 import { Formik } from "formik";
-import { useEffect, useMemo, useRef, useState } from "react";
-import { FaCopy, FaTrash, FaVolumeMute } from "react-icons/fa";
+import { useEffect, useRef, useState } from "react";
+import { FaCopy } from "react-icons/fa";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { Socket, io } from "socket.io-client";
@@ -28,26 +28,10 @@ function Room() {
   const [username, setLoggedUser] = useRecoilState(loggedUserAtom);
   const [messageValue, setMessageValue] = useState("");
   const { roomId } = useParams();
-  const [participants, setParticipants] = useState([{ username: "" }]);
-
   const socketRef = useRef<Socket | null>();
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
     alert("ID copiado para a área de transferência");
-  };
-
-  const handleRemoveParticipant = (name: string) => {
-    setParticipants(
-      participants.filter((participant) => participant.username !== name)
-    );
-  };
-
-  const handleMuteParticipant = (name: string) => {
-    setParticipants(
-      participants.map((participant) =>
-        participant.username === name ? { ...participant } : participant
-      )
-    );
   };
 
   const handleJoinOut = () => {
@@ -61,6 +45,8 @@ function Room() {
 
     socketRef.current.open();
 
+    socketRef.current.emit("participant_connected", { roomId, username });
+
     socketRef.current.on(String(roomId), (msgs) => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       setMessages((current) => {
@@ -73,16 +59,12 @@ function Room() {
       });
     });
 
-    socketRef.current.on("participants", (participant) => {
-      setParticipants((p) => [...p, participant]);
-    });
-
     return () => {
-      socketRef.current?.close();
+      socketRef.current?.emit("participant_disconnected", { roomId });
       socketRef.current?.off(roomId);
-      socketRef.current?.off("participants");
+      socketRef.current?.close();
     };
-  }, [roomId]);
+  }, [roomId, username]);
 
   useEffect(() => {
     const getMessages = async () => {
@@ -95,35 +77,11 @@ function Room() {
 
       const res = await msgs.json();
 
-      console.log({
-        res,
-      });
-
       setMessages(res);
     };
 
     getMessages();
   }, [roomId]);
-
-  useEffect(() => {
-    socketRef.current = io("ws://localhost:8000");
-
-    socketRef.current.open();
-
-    socketRef.current?.emit("connected", {
-      username,
-      roomId,
-    });
-
-    return () => {
-      socketRef.current?.close();
-      socketRef.current?.off(roomId);
-    };
-  }, [roomId, username]);
-
-  const filteredParticipants = useMemo(() => {
-    return participants.filter((e) => e.username);
-  }, [participants]);
 
   if (!username) {
     return (
@@ -324,27 +282,6 @@ function Room() {
             )}
           </Formik>
         </div>
-
-        <div className="w-full h-full max-w-2xl bg-gray-900 rounded-lg shadow-md p-6 space-y-6">
-          <div className="space-y-4">
-            <h2 className="text-2xl font-semibold text-white">Participantes</h2>
-            <div className="flex flex-col space-y-2">
-              {filteredParticipants.map(
-                (participant) =>
-                  participant.username.length && (
-                    <Participant
-                      key={participant.username}
-                      name={participant.username}
-                      onRemove={() =>
-                        handleRemoveParticipant(participant.username)
-                      }
-                      onMute={() => handleMuteParticipant(participant.username)}
-                    />
-                  )
-              )}
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );
@@ -374,46 +311,6 @@ const Message = ({
           <p className="text-sm text-gray-500">{timestemp}</p>
         </div>
         <div className="text-gray-500 text-sm">{message}</div>
-      </div>
-    </div>
-  );
-};
-
-const Participant = ({
-  name,
-  onMute,
-  onRemove,
-}: {
-  name: string;
-  onRemove: () => void;
-  onMute: () => void;
-}) => {
-  return (
-    <div
-      className="flex items-center justify-start w-full space-x-2 p-2"
-      key={name}
-    >
-      <div className="h-8 w-8 rounded-full bg-green-500 flex items-center justify-center text-white font-bold">
-        {name.charAt(0)}
-      </div>
-      <div className="flex justify-between w-full">
-        <div className="flex items-start space-x-2">
-          <span className="text-white">{name}</span>
-        </div>
-        <div className="flex space-x-2 gap-4">
-          <button
-            onClick={onMute}
-            className="text-gray-500 hover:text-gray-700 focus:outline-none"
-          >
-            <FaVolumeMute />
-          </button>
-          <button
-            onClick={onRemove}
-            className="text-red-500 hover:text-red-700 focus:outline-none"
-          >
-            <FaTrash />
-          </button>
-        </div>
       </div>
     </div>
   );
