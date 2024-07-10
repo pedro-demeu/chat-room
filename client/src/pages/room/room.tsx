@@ -169,9 +169,9 @@ function Room() {
   }
 
   return (
-    <div className="h-full w-full bg-gray-950 flex justify-center items-center">
-      <div className="flex  w-[50%] h-full flex-col gap-4 justify-center items-center min-h-scree p-4">
-        <div className="w-full max-w-2xl bg-gray-900 rounded-lg shadow-md p-6 space-y-6">
+    <div className="w-full h-screen bg-gray-950 flex justify-center items-center">
+      <div className="flex  lg:w-[50%] h-full flex-col gap-4 justify-center items-center min-h-scree p-4">
+        <div className="w-full lg:max-w-2xl bg-gray-900 rounded-lg shadow-md p-6 space-y-6">
           <div className="flex justify-between space-x-2">
             <h1 className="text-3xl font-bold text-left text-white">
               Chat em Tempo Real
